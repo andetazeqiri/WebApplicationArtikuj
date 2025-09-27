@@ -1,0 +1,53 @@
+﻿<Properties StartupConfiguration="{82E67AC9-72FC-49B2-BC55-443833D4E216}|https">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Frontend/ArtikujManager.Web/Views/Artikujt/Edit.cshtml">
+    <Files>
+      <File FileName="Backend/ArtikujManager.API/Controllers/ArtikujtController.cs" />
+      <File FileName="Backend/ArtikujManager.API/Controllers/AuthController.cs" Line="154" Column="13" />
+      <File FileName="Backend/ArtikujManager.API/Data/ApplicationDbContext.cs" />
+      <File FileName="Backend/ArtikujManager.API/DTOs/ArtikujDTOs.cs" />
+      <File FileName="Backend/ArtikujManager.API/DTOs/AuthDTOs.cs" />
+      <File FileName="Backend/ArtikujManager.API/Models/ApplicationUser.cs" />
+      <File FileName="Backend/ArtikujManager.API/Models/Artikuj.cs" />
+      <File FileName="Frontend/ArtikujManager.Web/Controllers/ArtikujtController.cs" />
+      <File FileName="Frontend/ArtikujManager.Web/Controllers/AuthController.cs" />
+      <File FileName="Frontend/ArtikujManager.Web/Controllers/HomeController.cs" />
+      <File FileName="Frontend/ArtikujManager.Web/Models/ArtikujViewModels.cs" />
+      <File FileName="Frontend/ArtikujManager.Web/Models/AuthViewModels.cs" />
+      <File FileName="Frontend/ArtikujManager.Web/Services/ApiService.cs" />
+      <File FileName="Frontend/ArtikujManager.Web/Views/Artikujt/Create.cshtml" />
+      <File FileName="Frontend/ArtikujManager.Web/Views/Auth/Login.cshtml" />
+      <File FileName="Frontend/ArtikujManager.Web/Views/Auth/Register.cshtml" />
+      <File FileName="Frontend/ArtikujManager.Web/Views/Auth/AccessDenied.cshtml" />
+      <File FileName="Frontend/ArtikujManager.Web/Views/Artikujt/Edit.cshtml" Line="92" Column="33" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ArtikujManagerMVC">
+            <Node name="Backend">
+              <Node name="ArtikujManager.API" expanded="True">
+                <Node name="Controllers" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="Frontend" expanded="True">
+              <Node name="ArtikujManager.Web">
+                <Node name="Views" expanded="True">
+                  <Node name="Artikujt" expanded="True">
+                    <Node name="Edit.cshtml" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Backend.ArtikujManager.API PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>

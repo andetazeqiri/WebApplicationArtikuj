@@ -1,0 +1,6 @@
+@ArtikujManager.API_HostAddress = http://localhost:5276
+
+GET {{ArtikujManager.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,169 @@
+@model ArtikujManager.Web.Models.CreateArtikujViewModel
+
+@{
+    ViewData["Title"] = "Shto Artikull";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-plus-circle me-2 text-success"></i>
+                    Shto Artikull të Ri
+                </h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Emri" class="form-label required"></label>
+                                <input asp-for="Emri" class="form-control" placeholder="Shkruani emrin e artikullit" />
+                                <span asp-validation-for="Emri" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Barkodi" class="form-label"></label>
+                                <input asp-for="Barkodi" class="form-control" placeholder="Shkruani barkodin e artikullit" />
+                                <span asp-validation-for="Barkodi" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label asp-for="Njesia" class="form-label"></label>
+                                <input asp-for="Njesia" class="form-control" placeholder="p.sh. Kg, Litra, Copë" />
+                                <span asp-validation-for="Njesia" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label asp-for="DataSkadences" class="form-label"></label>
+                                <input asp-for="DataSkadences" class="form-control" type="date" />
+                                <span asp-validation-for="DataSkadences" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label asp-for="Cmimi" class="form-label required"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">€</span>
+                                    <input asp-for="Cmimi" class="form-control" type="number" step="0.01" min="0" 
+                                           placeholder="0.00" />
+                                </div>
+                                <span asp-validation-for="Cmimi" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Lloj</label>
+                                <div class="form-check">
+                                    <input asp-for="Lloj" class="form-check-input" type="radio" value="Importuar" id="lloj-importuar" />
+                                    <label class="form-check-label" for="lloj-importuar">
+                                        Importuar
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input asp-for="Lloj" class="form-check-input" type="radio" value="Vendi" id="lloj-vendi" checked />
+                                    <label class="form-check-label" for="lloj-vendi">
+                                        Vendi
+                                    </label>
+                                </div>
+                                <span asp-validation-for="Lloj" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Ka TVSH</label>
+                                <div class="form-check">
+                                    <input name="KaTvshOption" class="form-check-input katvsh-option" type="checkbox" value="true" id="katvsh-po" onchange="handleKaTvshChange(this)" />
+                                    <label class="form-check-label" for="katvsh-po">
+                                        Po
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input name="KaTvshOption" class="form-check-input katvsh-option" type="checkbox" value="false" id="katvsh-jo" onchange="handleKaTvshChange(this)" checked />
+                                    <label class="form-check-label" for="katvsh-jo">
+                                        Jo
+                                    </label>
+                                </div>
+                                <input asp-for="KaTvsh" type="hidden" id="KaTvsh" />
+                                <span asp-validation-for="KaTvsh" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label asp-for="Tipi" class="form-label"></label>
+                                <select asp-for="Tipi" class="form-control">
+                                    <option value="Ushqimor">Ushqimor</option>
+                                    <option value="Bulmet">Bulmet</option>
+                                    <option value="Pije">Pije</option>
+                                    <option value="Embelsire">Embëlsirë</option>
+                                </select>
+                                <span asp-validation-for="Tipi" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>
+                            Kthehu te Lista
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save me-1"></i>
+                            Ruaj Artikullin
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <style>
+        .form-label.required::after {
+            content: " *";
+            color: red;
+        }
+    </style>
+    
+    <script>
+        function handleKaTvshChange(clickedCheckbox) {
+          
+            document.querySelectorAll('.katvsh-option').forEach(function(checkbox) {
+                if (checkbox !== clickedCheckbox) {
+                    checkbox.checked = false;
+                }
+            });
+            
+           
+            const hiddenField = document.getElementById('KaTvsh');
+            if (clickedCheckbox.checked) {
+                hiddenField.value = clickedCheckbox.value;
+            } else {
+                hiddenField.value = 'false'; 
+            }
+        }
+        
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const joCheckbox = document.getElementById('katvsh-jo');
+            if (joCheckbox && joCheckbox.checked) {
+                document.getElementById('KaTvsh').value = 'false';
+            }
+        });
+    </script>
+}

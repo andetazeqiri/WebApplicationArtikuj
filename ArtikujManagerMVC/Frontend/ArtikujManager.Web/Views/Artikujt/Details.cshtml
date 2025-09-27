@@ -1,0 +1,217 @@
+@model ArtikujManager.Web.Models.ArtikujViewModel
+
+@{
+    ViewData["Title"] = $"Detajet - {Model.Emri}";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Detajet e Artikullit
+                        </h5>
+                    </div>
+                    <div>
+                        <a asp-action="Index" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-arrow-left me-1"></i>
+                            Kthehu te Lista
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3 class="text-primary mb-3">@Model.Emri</h3>
+                        <p class="lead text-muted mb-4">
+                            @if (!string.IsNullOrEmpty(Model.Barkodi))
+                            {
+                                <strong>Barkodi:</strong> @Model.Barkodi
+                            }
+                            else
+                            {
+                                <em>Barkodi nuk është përcaktuar</em>
+                            }
+                        </p>
+                        
+                        <div class="row mb-4">
+                            <div class="col-sm-6">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h5 class="text-success mb-1">€@Model.Cmimi.ToString("F2")</h5>
+                                        <small class="text-muted">Çmimi</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="card bg-light">
+                                    <div class="card-body text-center">
+                                        <h5 class="text-info mb-1">
+                                            @(!string.IsNullOrEmpty(Model.Njesia) ? Model.Njesia : "-")
+                                        </h5>
+                                        <small class="text-muted">Njësia</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-tag me-1"></i>
+                                    Tipi
+                                </h6>
+                                <p class="card-text">
+                                    @(!string.IsNullOrEmpty(Model.Tipi) ? Model.Tipi : "E papërcaktuar")
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <!-- Product Information -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">Detaje të Produktit</h6>
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td class="text-muted">Lloj:</td>
+                                        <td>
+                                            <span class="badge @(Model.Lloj == "Importuar" ? "bg-info" : "bg-success")">
+                                                @Model.Lloj
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted">Ka TVSH:</td>
+                                        <td>
+                                            <span class="badge @(Model.KaTvsh ? "bg-success" : "bg-secondary")">
+                                                @(Model.KaTvsh ? "Po" : "Jo")
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    @if (Model.DataSkadences.HasValue)
+                                    {
+                                        <tr>
+                                            <td class="text-muted">Data e Skadencës:</td>
+                                            <td class="fw-bold">@Model.DataSkadences.Value.ToString("dd/MM/yyyy")</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-3">
+                            <i class="fas fa-calendar-plus me-1"></i>
+                            Informacione të Krijimit
+                        </h6>
+                        <table class="table table-sm">
+                            <tr>
+                                <td class="text-muted">Data e krijimit:</td>
+                                <td class="fw-bold">@Model.DataKrijimit.ToString("dd/MM/yyyy HH:mm")</td>
+                            </tr>
+                            @if (!string.IsNullOrEmpty(Model.KrijuarNga))
+                            {
+                                <tr>
+                                    <td class="text-muted">Krijuar nga:</td>
+                                    <td class="fw-bold">@Model.KrijuarNga</td>
+                                </tr>
+                            }
+                        </table>
+                        
+                        @if (Model.DataModifikimit.HasValue)
+                        {
+                            <h6 class="text-muted mb-3 mt-4">
+                                <i class="fas fa-calendar-edit me-1"></i>
+                                Modifikimi i Fundit
+                            </h6>
+                            <table class="table table-sm">
+                                <tr>
+                                    <td class="text-muted">Data e modifikimit:</td>
+                                    <td class="fw-bold">@Model.DataModifikimit.Value.ToString("dd/MM/yyyy HH:mm")</td>
+                                </tr>
+                                @if (!string.IsNullOrEmpty(Model.ModifikuarNga))
+                                {
+                                    <tr>
+                                        <td class="text-muted">Modifikuar nga:</td>
+                                        <td class="fw-bold">@Model.ModifikuarNga</td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                    </div>
+                </div>
+                
+                @if (Model.DataSkadences.HasValue && Model.DataSkadences.Value <= DateTime.Now.AddDays(30))
+                {
+                    <div class="alert alert-warning mt-3" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Paralajmërim:</strong> Ky produkt skadon së shpejti (@Model.DataSkadences.Value.ToString("dd/MM/yyyy")).
+                    </div>
+                }
+                else if (Model.DataSkadences.HasValue && Model.DataSkadences.Value <= DateTime.Now)
+                {
+                    <div class="alert alert-danger mt-3" role="alert">
+                        <i class="fas fa-times-circle me-2"></i>
+                        <strong>I skaduar:</strong> Ky produkt është i skaduar.
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-1"></i>
+                        Kthehu te Lista
+                    </a>
+                    @if (ViewBag.UserRole == "Admin")
+                    {
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+                                <i class="fas fa-edit me-1"></i>
+                                Përditëso
+                            </a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                <i class="fas fa-trash me-1"></i>
+                                Fshi
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.UserRole == "Admin")
+{
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmo Fshirjen</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>A jeni të sigurt që dëshironi të fshini artikullin <strong>"@Model.Emri"</strong>?</p>
+                    <p class="text-danger"><small>Kjo veprim nuk mund të kthehet pas!</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulo</button>
+                    <form asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-danger">Fshi Artikullin</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
